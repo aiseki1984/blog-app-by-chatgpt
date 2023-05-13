@@ -1,0 +1,85 @@
+@baseurl = http://localhost:3000
+###
+GET {{baseurl}}
+
+### Register a new user
+POST {{baseurl}}/api/users/register
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test@example.com",
+  "password": "testpassword"
+}
+
+### Login
+POST {{baseurl}}/api/users/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "testpassword"
+}
+
+### Get user profile (requires auth)
+GET {{baseurl}}/api/users/profile
+
+### Logout (requires auth)
+POST {{baseurl}}/api/users/logout
+
+
+###
+# @name get users
+GET {{baseurl}}/users
+
+###
+# @name create user
+POST {{baseurl}}/users
+Content-Type: application/json
+
+{
+    "name": "John",
+    "email": "john@example.com" 
+}
+
+###
+# @name get user
+GET {{baseurl}}/users/cd224a16-2012-465c-83f6-ce23b3f1a934
+Content-Type: application/json
+
+
+###
+# @name update user
+PUT {{baseurl}}/users/cd224a16-2012-465c-83f6-ce23b3f1a934
+Content-Type: application/json
+
+{
+  "name":"Kevin"
+}
+
+###
+# @name delete user
+DELETE {{baseurl}}/users/cd224a16-2012-465c-83f6-ce23b3f1a934
+
+###
+# @name create post
+POST {{baseurl}}/posts
+Content-Type: application/json
+
+{
+    "title": "Prismaの基本",
+    "content": "リレーションショッピンの設定を確認中",
+    "authorId": "cd224a16-2012-465c-83f6-ce23b3f1a934" 
+}
+ 
+###
+# @name create post2
+POST {{baseurl}}/posts
+Content-Type: application/json
+
+{
+    "title": "Prismaの基本2",
+    "content": "Postテーブルへの新規データ作成を確認",
+    "authorId": "cd224a16-2012-465c-83f6-ce23b3f1a934"
+}
+ 

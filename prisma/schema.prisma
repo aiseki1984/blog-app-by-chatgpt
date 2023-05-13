@@ -1,0 +1,50 @@
+// schema.prisma
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique @map("email")
+  password     String
+  roleId       Int      @default(1)
+  role         Role     @relation(fields: [roleId], references: [id])
+  posts        Post[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  @@map("users")
+}
+
+model Role {
+  id        Int     @id @default(autoincrement())
+  name      String
+  users     User[]
+  @@map("roles")
+}
+
+model Post {
+  id          Int       @id @default(autoincrement())
+  title       String
+  content     String?
+  categoryId  Int       @default(1)
+  category    Category  @relation(fields: [categoryId], references: [id])
+  authorId    Int
+  author      User      @relation(fields: [authorId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  @@map("posts")
+}
+
+model Category {
+  id         Int       @id @default(autoincrement())
+  name       String
+  posts      Post[]   
+  @@map("categories")
+}
